@@ -1,0 +1,25 @@
+#version 330 core
+
+layout(location = 0) in vec3 vertex_position;
+layout(location = 1) in vec3 normal;
+
+// Values that stay constant for the whole mesh.
+uniform mat4 MVP;
+uniform float X_SWING;
+uniform vec3 LightPos;
+
+out vec3 FragPos;
+out vec3 Normal;
+
+void main(){
+    int scal = 200;
+    
+    FragPos = vec3((vertex_position.x/scal), (vertex_position.z/scal), (vertex_position.y/scal));
+    Normal = normal;
+    
+    //gl_position : vertex pos = MVP * position
+    gl_Position =  MVP * vec4((vertex_position.x/scal), (vertex_position.y/scal), (vertex_position.z/scal), 1);
+    gl_Position.x = gl_Position.x + X_SWING;
+    
+}
+
