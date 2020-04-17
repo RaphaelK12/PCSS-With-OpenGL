@@ -36,10 +36,16 @@ void load_obj(const char* filename, vector<glm::vec3> &vertices, vector<glm::vec
         {
             istringstream s(line.substr(2));
             if(swap_y_z){
-                glm::vec4 v; s >> v.x; s >> v.z; s >> v.y;
+                glm::vec4 v;
+                s >> v.x;
+                s >> v.z;
+                s >> v.y;
                 vertices.push_back(v);
             } else {
-                glm::vec4 v; s >> v.x; s >> v.y; s >> v.z;
+                glm::vec4 v;
+                s >> v.x;
+                s >> v.y;
+                s >> v.z;
                 vertices.push_back(v);
             }
         }

@@ -5,16 +5,18 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
-using namespace std;
-
 #include <stdlib.h>
 #include <string.h>
-
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "shader.hpp"
+using namespace std;
 
-GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
+//Huge thanks to the website https://learnopengl.com/code_viewer_gh.php?code=src/2.lighting/2.2.basic_lighting_specular
+
+Shader::Shader(const char * vertex_file_path, const char * fragment_file_path){
 
     // Create the shaders
     GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -31,7 +33,7 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
     }else{
         printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
         getchar();
-        return 0;
+        return;
     }
 
     // Read the Fragment Shader code from the file
@@ -104,7 +106,31 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
     glDeleteShader(VertexShaderID);
     glDeleteShader(FragmentShaderID);
 
-    return ProgramID;
+    ID = ProgramID;
 }
 
+void Shader::use()
+{
+    glUseProgram(ID);
+}
+
+void Shader::setFloat(const std::string &name, float value) {
+    glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+}
+
+void Shader::setVec2(const std::string &name, const glm::vec2 &value) {
+    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+}
+
+void Shader::setVec3(const std::string &name, const glm::vec3 &value) {
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+}
+
+void Shader::setMat3(const std::string &name, const glm::mat3 &mat) {
+    glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+
+void Shader::setMat4(const std::string &name, const glm::mat4 &mat) {
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
 

@@ -4,22 +4,27 @@ layout(location = 0) in vec3 vertex_position;
 layout(location = 1) in vec3 normal;
 
 // Values that stay constant for the whole mesh.
-uniform mat4 MVP;
-uniform float X_SWING;
-uniform vec3 LightPos;
+uniform mat4 MODEL;
+uniform mat4 VIEW;
+uniform mat4 PROJECTION;
+uniform float SCALE;
 
+
+uniform vec3 LIGHT_POS;
 out vec3 FragPos;
 out vec3 Normal;
 
 void main(){
-    int scal = 200;
+    //float scal = 300;
     
-    FragPos = vec3((vertex_position.x/scal), (vertex_position.z/scal), (vertex_position.y/scal));
-    Normal = normal;
+    //FragPos = vec3(MODEL * vec4(vertex_position, 1.0)/SCALE);
     
-    //gl_position : vertex pos = MVP * position
-    gl_Position =  MVP * vec4((vertex_position.x/scal), (vertex_position.y/scal), (vertex_position.z/scal), 1);
-    gl_Position.x = gl_Position.x + X_SWING;
+    vec4 world_pos = MODEL * vec4(vertex_position, 1);
+    FragPos = vec3((world_pos.x/SCALE), (world_pos.y/SCALE), (world_pos.z/SCALE));
+    
+    Normal = mat3(transpose(inverse(MODEL))) * normal;
+    
+    gl_Position = PROJECTION * VIEW *  MODEL * vec4((vertex_position.x/SCALE), (vertex_position.y/SCALE), (vertex_position.z/SCALE), 1);
     
 }
 
