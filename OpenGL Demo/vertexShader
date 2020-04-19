@@ -7,24 +7,24 @@ layout(location = 1) in vec3 normal;
 uniform mat4 MODEL;
 uniform mat4 VIEW;
 uniform mat4 PROJECTION;
-uniform float SCALE;
-
-
+uniform mat4 LIGHTSPACE;
 uniform vec3 LIGHT_POS;
+
+//output
 out vec3 FragPos;
 out vec3 Normal;
+out vec4 FragLightSpace;
+
 
 void main(){
-    //float scal = 300;
-    
-    //FragPos = vec3(MODEL * vec4(vertex_position, 1.0)/SCALE);
-    
     vec4 world_pos = MODEL * vec4(vertex_position, 1);
-    FragPos = vec3((world_pos.x/SCALE), (world_pos.y/SCALE), (world_pos.z/SCALE));
     
+    FragPos = vec3((world_pos.x), (world_pos.y), (world_pos.z));
     Normal = mat3(transpose(inverse(MODEL))) * normal;
     
-    gl_Position = PROJECTION * VIEW *  MODEL * vec4((vertex_position.x/SCALE), (vertex_position.y/SCALE), (vertex_position.z/SCALE), 1);
+    FragLightSpace = LIGHTSPACE * vec4(FragPos, 1.0);
+    
+    gl_Position = PROJECTION * VIEW *  MODEL * vec4((vertex_position.x), (vertex_position.y), (vertex_position.z), 1);
     
 }
 

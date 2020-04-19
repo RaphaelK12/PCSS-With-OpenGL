@@ -23,6 +23,8 @@ public:
     void use();
     
     void setFloat(const std::string &name, float value);
+    
+    void setInt(const std::string &name, int value);
 
     void setVec2(const std::string &name, const glm::vec2 &value);
 
