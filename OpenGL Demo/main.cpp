@@ -97,7 +97,7 @@ int main( void )
     Shader itemShader("vertexShader", "fragmentShader");
     
     //TODO: make scale automatic!
-    float object_scale = 300;
+    float object_scale = 200;
        
     //OBJECT Buffer!
     //here to load obj/or create vertex!
@@ -127,13 +127,13 @@ int main( void )
     
     float floor[] = {
         // positions            // normals
-         1.0f, -0.5f,  -1.0f,  0.0f, 1.0f, 0.0f,
-        -1.0f, -0.5f,  -1.0f,  0.0f, 1.0f, 0.0f,
-        -1.0f, -0.5f,   1.0f,  0.0f, 1.0f, 0.0f,
+         2.0f, -0.5f,  -1.5f,  0.0f, 1.0f, 0.0f,
+        -2.0f, -0.5f,  -1.5f,  0.0f, 1.0f, 0.0f,
+        -2.0f, -0.5f,   1.5f,  0.0f, 1.0f, 0.0f,
 
-         1.0f, -0.5f,  -1.0f,  0.0f, 1.0f, 0.0f,
-        -1.0f, -0.5f,   1.0f,  0.0f, 1.0f, 0.0f,
-         1.0f, -0.5f,   1.0f,  0.0f, 1.0f, 0.0f
+         2.0f, -0.5f,  -1.5f,  0.0f, 1.0f, 0.0f,
+        -2.0f, -0.5f,   1.5f,  0.0f, 1.0f, 0.0f,
+         2.0f, -0.5f,   1.5f,  0.0f, 1.0f, 0.0f
     };
     GLuint planeVBO;
     GLuint planeVAO;
@@ -179,7 +179,7 @@ int main( void )
     itemShader.use();
     itemShader.setInt("shadowMap", 0);
     
-    glm::vec3 lightPos = glm::vec3(1.0f, 2.0f, 1.0f);
+    glm::vec3 lightPos = glm::vec3(2.0f, 0.8f, 1.0f);
     glm::vec3 lightColor = glm::vec3(1.0f);
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)retina_w / (float)retina_h, 0.1f, 100.0f);
     
@@ -194,9 +194,9 @@ int main( void )
         shadowShader.use();
         glm::mat4 lightProjection, lightView;
         glm::mat4 lightSpaceMatrix;
-        float near_plane = 0.5f, far_plane = 7.0f;
+        float near_plane = 1.0f, far_plane = 7.0f;
         lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
-        //lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+        //lightProjection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, near_plane, far_plane);
         lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
         lightSpaceMatrix = lightProjection * lightView;
         // render scene from light's point of view
@@ -224,10 +224,10 @@ int main( void )
         itemShader.use();
         
         //Deal with view position here
-        //float view_X = sin(glfwGetTime()) * 3.0f;
-        //float View_Z = cos(glfwGetTime()) * 3.0f;
-        float view_X = sin(0) * 3.0f;
-        float View_Z = cos(0) * 3.0f;
+        float view_X = sin(0.05*glfwGetTime()) * 3.0f;
+        float View_Z = cos(0.05*glfwGetTime()) * 3.0f;
+        //float view_X = sin(0) * 3.0f;
+        //float View_Z = cos(0) * 3.0f;
         
         glm::vec3 viewPos = glm::vec3(view_X, 1.0f, View_Z);
         //glm::vec3 viewPos = glm::vec3(0, 1.0f, 2.0f);
@@ -304,7 +304,8 @@ void drawObject(GLuint VertexArrayID, float object_scale, GLuint vertexbuffer, G
     
     //Model --> local to world
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f));
+    //model = glm::translate(model, glm::vec3(0.0f));
+    model = glm::translate(model, glm::vec3(0.0f, -0.3f, 0.0f));
     //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
     model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::scale(model, glm::vec3(1/object_scale));

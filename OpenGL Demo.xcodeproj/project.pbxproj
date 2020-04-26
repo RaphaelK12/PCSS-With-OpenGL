@@ -45,6 +45,8 @@
 		DDEEE166244277C90078BA75 /* control.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = control.hpp; sourceTree = "<group>"; };
 		DDEEE16824427B1C0078BA75 /* pumpkin.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = pumpkin.obj; sourceTree = "<group>"; };
 		DDEEE169244410B50078BA75 /* cow.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cow.obj; sourceTree = "<group>"; };
+		DDEEE16A244977B10078BA75 /* shadowVertexShader */ = {isa = PBXFileReference; lastKnownFileType = text; path = shadowVertexShader; sourceTree = "<group>"; };
+		DDEEE16B244977C90078BA75 /* shadowFragmentShader */ = {isa = PBXFileReference; lastKnownFileType = text; path = shadowFragmentShader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,8 @@
 				DDEEE164244271D10078BA75 /* cube.obj */,
 				DDEEE16824427B1C0078BA75 /* pumpkin.obj */,
 				DDEEE169244410B50078BA75 /* cow.obj */,
+				DDEEE16A244977B10078BA75 /* shadowVertexShader */,
+				DDEEE16B244977C90078BA75 /* shadowFragmentShader */,
 			);
 			path = "OpenGL Demo";
 			sourceTree = "<group>";
