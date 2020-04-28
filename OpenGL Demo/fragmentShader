@@ -34,6 +34,9 @@ float avg_block_depth(vec4 FragLightSpace, float w_light){
     float currentDepth = projCoords.z;
     
     float search_range = w_light * (currentDepth - 0.05) /currentDepth;
+    if(search_range <= 0){
+        return 0;
+    }
     //return search_range / 7.0;
     int range = int(search_range);
     //return range / 10.0;
@@ -78,7 +81,7 @@ float ShadowCalculation(vec4 FragLightSpace)
     // calculate bias (based on depth map resolution and slope)
     vec3 normal = normalize(Normal);
     vec3 lightDir = normalize(LIGHT_POS - FragPos);
-    float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.005);
+    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.001);
     
     float w_light = 7.0;
     
@@ -103,10 +106,14 @@ float ShadowCalculation(vec4 FragLightSpace)
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
     int count = 0;
     
+    //pick a searching range based on calculated penumbra width.
     int range = int(w_penumbra/0.09);
     
-    //return w_penumbra;
+    //manually set a range if it is too large!
+    range = range > 40 ? 40 : range;
+    range = range < 1 ? 2 : range;
     
+    //return w_penumbra;
     
     for(int x = -range; x <= range; ++x)
     {
