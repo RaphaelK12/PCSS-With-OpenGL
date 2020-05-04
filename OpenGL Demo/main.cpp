@@ -240,8 +240,8 @@ int main( void )
         itemShader.use();
         
         //Deal with view position here
-        float view_X = sin(0.1*glfwGetTime()) * 4.5f;
-        float View_Z = cos(0.1*glfwGetTime()) * 4.5f;
+        float view_X = sin(0.1*glfwGetTime()) * 4.0f;
+        float View_Z = cos(0.1*glfwGetTime()) * 4.0f;
         //float view_X = sin(0) * 3.0f;
         //float View_Z = cos(0) * 3.0f;
         

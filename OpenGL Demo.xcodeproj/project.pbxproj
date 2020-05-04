@@ -38,6 +38,7 @@
 		DDA3D10B243E99BB0069EF2D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		DDA3D10D243E99D60069EF2D /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		DDA3D10F243E99F60069EF2D /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		DDDBDAC32457EE5B00C2C96A /* lamp.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = lamp.obj; sourceTree = "<group>"; };
 		DDEEE16124426C3A0078BA75 /* objloader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = objloader.cpp; sourceTree = "<group>"; };
 		DDEEE16224426C3A0078BA75 /* objloader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objloader.hpp; sourceTree = "<group>"; };
 		DDEEE164244271D10078BA75 /* cube.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 				DDEEE169244410B50078BA75 /* cow.obj */,
 				DDEEE16A244977B10078BA75 /* shadowVertexShader */,
 				DDEEE16B244977C90078BA75 /* shadowFragmentShader */,
+				DDDBDAC32457EE5B00C2C96A /* lamp.obj */,
 			);
 			path = "OpenGL Demo";
 			sourceTree = "<group>";
